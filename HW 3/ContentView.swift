@@ -7,10 +7,28 @@
 
 import SwiftUI
 
+//var test =  SetGame()
+
 struct ContentView: View {
+    
+    //viewModel Variable here
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack{
+            ScrollView{
+                Text("Set!")
+                    .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+             
+                
+                
+                    
+                Button(action: {}, label: {
+                    Text("New Game")
+                })
+            }
+        }
+        
+        
     }
 }
 
