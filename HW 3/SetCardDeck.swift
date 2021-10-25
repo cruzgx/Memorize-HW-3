@@ -9,7 +9,7 @@ import Foundation
 
 //consider naming as Deck?
 struct SetCardDeck {
-    private(set) var deck = Array<SetCard>()
+    var deck = Array<SetCard>()
     
     
     init() {
@@ -73,7 +73,9 @@ struct SetCardDeck {
         return newCard
     }
     
-    
+//    func getIndicies() -> Range<Int> {
+//        deck.indices
+//    }
 
 //    func getCard(index: Int) -> SetCard? {
 //        if index < 0 || index >= deck.count {

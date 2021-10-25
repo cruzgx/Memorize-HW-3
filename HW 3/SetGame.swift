@@ -13,10 +13,10 @@ import Foundation
 struct SetGame {
     
     var setDeck = SetCardDeck()
-    var cards = [SetCard]() //the cards in play
+    var cards = [SetCard]() //the cards beings displayed
     var score = 0;
     
-    //var selectedCards = [SetCard]() //cards the user touches
+    var selectedCards = [SetCard]() //cards the user touches
     
     
     //Note: A game should start with 12 cards
@@ -38,20 +38,49 @@ struct SetGame {
     
     
     mutating func selectCard(pos: Int) {
-//        //var chosenCard =
-//        if(pos < 0 || pos >= SetDeck.count) {return}
+        // if card doeesnt exist in the set of cards being displayed at pos, return
+        if(!cards.indices.contains(pos) ) { return }
+        
+        //add cards who haven't been selected to cards
+        if cards.count < 3 {
+            var chosenCard = cards[pos]
+            
+            if !chosenCard.isSelected {
+                chosenCard.isSelected.toggle() //possible bug here.
+                selectedCards.append(chosenCard)
+                return
+            }
+        }
+        
+        //MARK: chck for a 'Set' : Consider using a helper function
+        let isSet = isASet(hand: cards)
+        
+//        let card1 = selectedCards[0] , card2 = selectedCards[1], card3 = selectedCards[2]
 //
-//        let card: SetCard = SetDeck.getCard(pos)!
+//        let areAllShapesSameOrDiff : Bool
+//        let areAllShadesSameOrDiff : Bool
+//        let areAllColorSameOrDiff  : Bool
+//        let areAllCountSameOrDiff  : Bool
 //
-//        //update the collectionOfSelectedCards we have selected
-//        selectedCards += card
-//        card.isSelected.toggle()
-//        //
+//        if (card1.shape == card2.shape  && card2.shape == card3.shape
+//            || ){
+//            areAllShapesSameOrDiff = true
+//        }
+        
+        
+        // if card is selected already deselect it and remove from cards
+//        if cards[pos].isSelected {
+//            cards[pos].isSelected.toggle()
+//            //REMOVE FROM CARDS IN PLAY (CARDS) & remove from deck?
+//            cards.remove(at: pos)
+//        }
+        
+        
     }
     
+    //disable this button if the deck is empty
     mutating func addThreeCards() {
-        //create 3 new cards and add to our set deck
-        //MARK: Implement me!
+        //show 3 new cards that are displayed from deck
         for _ in 1...3 {
             if let card = setDeck.dealCard() { //if calling the function does not return nil
                 cards.append(card)
@@ -60,5 +89,61 @@ struct SetGame {
             }
         }
     }
+    
+    
+    
+    
+    
+    //MARK: Helper functions
+    
+    //Given 3 card Returns if its a set.
+    private func isASet(hand cards: Array<SetCard>) -> Bool {
+        let card1 = cards[0], card2 = cards[1], card3 = cards[2]
+        
+        let areAllShapesSameOrDiff : Bool
+        let areAllShadesSameOrDiff : Bool
+        let areAllColorSameOrDiff  : Bool
+        let areAllCountSameOrDiff  : Bool
+        
+        
+        //Checks if card1, 2 and 3 all have the same shape or all dont
+        if (card1.shape == card2.shape  && card2.shape == card3.shape
+                || card1.shape != card2.shape && card2.shape != card3.shape && card3.shape != card1.shape){
+            areAllShapesSameOrDiff = true  //true iff all same or diff
+        } else {
+            areAllShapesSameOrDiff = false
+        }
+        
+        
+        //Checks if card1, 2, and 3 have either all the same shade or all diff shade
+        if(card1.shade == card2.shade && card2.shade == card3.shade
+            || card1.shade != card2.shade && card2.shade != card3.shade && card3.shade != card1.shade){
+            areAllShadesSameOrDiff = true
+        } else {
+            areAllShadesSameOrDiff = false
+        }
+        
+        
+        //Checks if card1, 2, and 3 have either all the same color or all diff shape
+        if(card1.color == card2.color && card2.color == card3.color
+            || card1.color != card2.color && card2.color != card3.color && card3.color != card1.color){
+            areAllColorSameOrDiff = true
+        } else {
+            areAllColorSameOrDiff = false
+        }
+        
+        //Checks to if card1, card 2 and 3 have either all the same ammnt. of shapes or all have a diff ammnt. of shapes
+        if (card1.count == card2.count && card2.count == card3.count
+            || card1.count != card2.count && card2.count != card3.count && card3.count != card1.count) {
+            areAllCountSameOrDiff = true
+        } else {
+            areAllCountSameOrDiff = false
+        }
+        
+        return areAllShapesSameOrDiff && areAllShadesSameOrDiff && areAllColorSameOrDiff && areAllCountSameOrDiff
+    }
+    
+    
+    
     
 }
