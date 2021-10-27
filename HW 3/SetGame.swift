@@ -36,24 +36,41 @@ struct SetGame {
     
     
     
-    
-    mutating func selectCard(pos: Int) {
-        // if card doeesnt exist in the set of cards being displayed at pos, return
-        if(!cards.indices.contains(pos) ) { return }
+    //update to card not pos
+    mutating func selectCard(_ card: SetCard) {
+//        // if card doeesnt exist in the set of cards being displayed at pos, return
+//        if(!cards.indices.contains(pos) ) { return }
+//
+//        //add cards who haven't been selected to cards or deselct them if numOfSelectedCards < 3
+//        if selectedCards.count < 3 {
+//            var chosenCard = cards[pos]
+//
+//            if !chosenCard.isSelected {
+//                chosenCard.isSelected.toggle() //possible bug here. Now selected
+//                selectedCards.append(chosenCard)
+//                return
+//            }
+//
+//            if chosenCard.isSelected {
+//                chosenCard.isSelected.toggle() //possible bug here; No longer selected
+//                selectedCards.removeAll(where: { $0 == chosenCard})
+//                return
+//            }
+//        }
+//
+//        //MARK: chck for a 'Set' : Consider using a helper function
+//        let isSet = isASet(hand: cards)
+//
+//        if isSet {
+//            score += 1
+//            //the selectedCards[] must be then set to unSelected AND REMOVED
+//
+//
+//        } else {
+//            //
+//        }
         
-        //add cards who haven't been selected to cards
-        if cards.count < 3 {
-            var chosenCard = cards[pos]
-            
-            if !chosenCard.isSelected {
-                chosenCard.isSelected.toggle() //possible bug here.
-                selectedCards.append(chosenCard)
-                return
-            }
-        }
         
-        //MARK: chck for a 'Set' : Consider using a helper function
-        let isSet = isASet(hand: cards)
         
 //        let card1 = selectedCards[0] , card2 = selectedCards[1], card3 = selectedCards[2]
 //
@@ -95,6 +112,16 @@ struct SetGame {
     
     
     //MARK: Helper functions
+    
+    //Clear and unselect cards from selectedCards[]
+//    private func clearSelectedCards(){
+//        for i in selectedCards {
+//            var card = selectedCards[i]
+//            card.isSelected.toggle()
+//        }
+//        selectedCards.removeAll()
+//    }
+    
     
     //Given 3 card Returns if its a set.
     private func isASet(hand cards: Array<SetCard>) -> Bool {

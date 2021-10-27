@@ -7,6 +7,7 @@
 //consider renaming to card?
 
 import Foundation
+import SwiftUI //Used to obtain color attribute
 
 struct SetCard : Identifiable, Equatable {
     //MARK: Hint to figure out there is a set, Use the Set data structure!
@@ -102,6 +103,19 @@ struct SetCard : Identifiable, Equatable {
         }
         
         return cardEmojis
+    }
+    
+    
+    func getCardColor() -> Color {
+        
+        switch self.color {
+        case Colors.red:
+            return Color.red
+        case Colors.green:
+            return Color.green
+        case Colors.purple:
+            return Color.purple
+        }
     }
     
     
