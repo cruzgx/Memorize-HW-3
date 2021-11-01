@@ -14,6 +14,8 @@ struct ContentView: View {
     //viewModel Variable here
     @ObservedObject var game : Game = Game()
     
+    
+    //Aspect VGrid?
     var body: some View {
         VStack {
             ScrollView {
@@ -59,6 +61,7 @@ struct CardView: View {
             Text(card.getCardContents())
                 .foregroundColor(card.getCardColor())
                 //Card Opacity Here.
+                .opacity(card.getCardOpacity())
                 
         }
     }

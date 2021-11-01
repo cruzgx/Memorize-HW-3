@@ -119,4 +119,7 @@ struct SetCard : Identifiable, Equatable {
     }
     
     
+    func getCardOpacity() -> Double {
+        self.shade == Shades.shaded ? 0.4 : 1.0
+    }
 }
