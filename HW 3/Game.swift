@@ -31,5 +31,9 @@ class Game: ObservableObject {
         model.selectCard(card)
     }
     
+    public func add3Cards(){
+        model.addThreeCards()
+    }
+    
     //Published private var model: SetGame<String>
 }

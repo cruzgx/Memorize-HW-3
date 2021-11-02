@@ -119,7 +119,15 @@ struct SetCard : Identifiable, Equatable {
     }
     
     
+    func getCardOutline() -> Color {
+         isSelected ? .green : .red //CORRECT
+    }
+    
     func getCardOpacity() -> Double {
         self.shade == Shades.shaded ? 0.4 : 1.0
+    }
+    
+    mutating func setCardToSelected() {
+        self.isSelected = true;
     }
 }

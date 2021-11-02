@@ -73,6 +73,7 @@ struct SetCardDeck {
         return newCard
     }
     
+    
 //    func getIndicies() -> Range<Int> {
 //        deck.indices
 //    }

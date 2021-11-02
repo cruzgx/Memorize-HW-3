@@ -28,16 +28,27 @@ struct ContentView: View {
                     ForEach(game.cards) { card in
                         CardView(card)
                             .aspectRatio(2/3, contentMode: .fit)
-                            .foregroundColor(.red)
+                            .onTapGesture {
+                                game.selectCard(card)
+                            }
+                            .foregroundColor(card.getCardOutline())
+                
                     }
                 }
                 .padding(.horizontal)
+                
+                //Crashes preivew
+                Button(action: {}, label: {
+                    Text("Deal 3 More Cards")
+                })
                 
                 Button(action: {game.newGame()}, label: {
                     Image(systemName: "play.fill")
                         .foregroundColor(.blue)
                     Text("New Game")
                 })
+                
+
             }
         }
         
@@ -62,8 +73,11 @@ struct CardView: View {
                 .foregroundColor(card.getCardColor())
                 //Card Opacity Here.
                 .opacity(card.getCardOpacity())
+            
                 
         }
+        
+        
     }
 }
 

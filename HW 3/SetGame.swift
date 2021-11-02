@@ -37,7 +37,7 @@ struct SetGame {
     
     
     //update to card not pos
-    mutating func selectCard(_ card: SetCard) {
+//    mutating func selectCard(_ card: SetCard) {
 //        // if card doeesnt exist in the set of cards being displayed at pos, return
 //        if(!cards.indices.contains(pos) ) { return }
 //
@@ -92,7 +92,18 @@ struct SetGame {
 //            cards.remove(at: pos)
 //        }
         
-        
+//
+//    }
+    
+    
+    mutating func selectCard(_ card: SetCard) {
+        if let idx = cards.firstIndex(where: { $0.id == card.id }), !selectedCards.contains(card) {
+            if selectedCards.count < 3 { //AND IS NOT ALREADY IN THE SELECTED CARDS...
+                cards[idx].isSelected.toggle()
+                selectedCards.append(cards[idx])
+            }
+        }
+
     }
     
     //disable this button if the deck is empty
