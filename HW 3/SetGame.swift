@@ -22,6 +22,8 @@ struct SetGame {
     //Note: A game should start with 12 cards
     init () {
         for _ in 1...12 {
+            //score = 0
+            
             if let card = setDeck.dealCard() { //if drawing a card doesn't give us nil
                 cards.append(card)
             } else {
@@ -101,8 +103,20 @@ struct SetGame {
             if selectedCards.count < 3 { //AND IS NOT ALREADY IN THE SELECTED CARDS...
                 cards[idx].isSelected.toggle()
                 selectedCards.append(cards[idx])
+                
+                if selectedCards.count == 3 && isASet(hand: selectedCards) {
+                    //remove all selected Cards AND coresspoinding cards in deck.
+                    for i in selectedCards {
+                        cards.removeAll(where: { $0 == i })
+                        selectedCards.removeAll()
+                    }
+                    score += 1
+                    return
+                }
             }
         }
+        
+        
 
     }
     
@@ -119,7 +133,9 @@ struct SetGame {
     }
     
     
-    
+    func getScore() -> Int {
+        score
+    }
     
     
     //MARK: Helper functions
@@ -134,7 +150,7 @@ struct SetGame {
 //    }
     
     
-    //Given 3 card Returns if its a set.
+    //Given 3 card Returns true if its a set.
     private func isASet(hand cards: Array<SetCard>) -> Bool {
         let card1 = cards[0], card2 = cards[1], card3 = cards[2]
         

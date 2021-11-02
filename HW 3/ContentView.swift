@@ -22,6 +22,8 @@ struct ContentView: View {
                 Text("Set!")
                     .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                 
+                Text("Score: " + String(game.getSetGameScore()))
+                    
                 
                 //Print out cards
                 LazyVGrid(columns:[GridItem(.adaptive(minimum: 75))]){
@@ -37,16 +39,27 @@ struct ContentView: View {
                 }
                 .padding(.horizontal)
                 
-                //Crashes preivew
-                Button(action: {}, label: {
-                    Text("Deal 3 More Cards")
-                })
+                //User Action Buttons
+                HStack {
+                    Button(action: {game.add3Cards()}, label: {
+                        Image(systemName: "square.fill.on.square")
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        Text("Deal 3 More Cards")
+                            
+                    })
+                    .font(.headline)
+                    
+                    Spacer()
+                    Button(action: {game.newGame()}, label: {
+                        Image(systemName: "play.fill")
+                            .foregroundColor(.blue)
+                        Text("New Game")
+                    })
+                    .font(.headline)
+                }
+                .padding()
                 
-                Button(action: {game.newGame()}, label: {
-                    Image(systemName: "play.fill")
-                        .foregroundColor(.blue)
-                    Text("New Game")
-                })
+                
                 
 
             }
@@ -55,6 +68,7 @@ struct ContentView: View {
         
     }
 }
+
 
 struct CardView: View {
     var card: SetCard
@@ -74,10 +88,7 @@ struct CardView: View {
                 //Card Opacity Here.
                 .opacity(card.getCardOpacity())
             
-                
         }
-        
-        
     }
 }
 

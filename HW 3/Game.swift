@@ -35,5 +35,9 @@ class Game: ObservableObject {
         model.addThreeCards()
     }
     
+    public func getSetGameScore() -> Int {
+        model.getScore()
+    }
+    
     //Published private var model: SetGame<String>
 }
